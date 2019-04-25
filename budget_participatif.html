@@ -1,0 +1,205 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Lanester, commune, budget, datavisualisation, graphique, politique, statistique, open data">
+  <meta name="description" content="Datavisualisation des données budgétaires de Lanester (56)." />
+  <title>Ville de Lanester - Budget 2019</title>
+  <script src="https://code.angularjs.org/1.7.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/d3.v4.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/modernizr.min.js"></script>
+  <script src="https://code.angularjs.org/1.2.2/angular-animate.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--
+  <script src="getbudget.js" type="text/javascript"></script> -->
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+  <!-- css -->
+  <link rel="stylesheet" type="text/css" href="css/elements.css">
+
+  </head>
+<body>
+  <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div class="container-fluid teal hero">
+    <div class="col-logo middle">
+      <a href="http://www.lanester.bzh" title="site de la Ville de Lanester" target="_blank"><img class="poster" src="images/logoblc_lanester.png"></img></a>
+    </div>
+    <div class="container" style="margin-bottom:50px;">
+      <div class="center middle-text">
+        <h1>Budget 2019</h1>
+        <h3>de la Ville de Lanester</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar" id="myNavbar">
+    <div class="container" style="min-height: 0px">
+    <a href="index.html"><i class="fa fa-home" style="font-size:28px"></i></a>
+    <a href="grands_chiffres.html">Les grands chiffres</a>
+    <a href="depenses_recettes.html">Les dépenses et recettes</a>
+    <a href="programme_investissements.html">Le programme d'investissements</a>
+    <a href="budget_participatif.html">Le budget participatif</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+    </div>
+  </div>
+
+  <script>
+  function myFunction() {
+    var x = document.getElementById("myNavbar");
+    if (x.className === "navbar") {
+      x.className += " responsive";
+    } else {
+      x.className = "navbar";
+    }
+  }
+  </script>
+
+<div class="container-fluid light-gray intro">
+  <div class="container" style="padding-bottom:20px;">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+    <h2>LE BUDGET PARTICIPATIF</h2>
+    <p>Depuis 2016, la Ville de Lanester alloue 100 000 € de son budget d'investissement pour la réalisation de projets proposés et choisis par les habitants.<br>Retrouvez ci-dessous les 3 projets lauréats en 2018 !</p>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 encart"><img src="images/curseur_blanc.png"></img><br>Survolez les icônes et voyez des informations apparaître sur les photos !</div>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+  <div class="container" style="padding-bottom:20px;">
+    <div class="col-md-6">
+      <h4 style="color:#1d68a5;">SPORT ET AVENTURE<br>AU PARC DU PLESSIS</h4>
+      <br>
+      <div class="wrapper_bdgtptcpf">
+        <div style="width:100%;">
+        <img src="images/faces.png" alt="personne(s) proposant le projet 2" style="cursor:pointer;width:66%;"onmouseover="document.getElementById('parc_txt_0').style.opacity=1;document.getElementById('img_pjt_2').style.opacity=0.1;" onmouseout="document.getElementById('parc_txt_0').style.opacity=0;document.getElementById('img_pjt_2').style.opacity=1;"></img>
+        </div>
+        <div style="width:100%;">
+        <img src="images/cible.png" alt="objectif du projet 2" style="cursor:pointer;width:66%;"onmouseover="document.getElementById('parc_txt_1').style.opacity=1;document.getElementById('img_pjt_2').style.opacity=0.1;" onmouseout="document.getElementById('parc_txt_1').style.opacity=0;document.getElementById('img_pjt_2').style.opacity=1;"></img>
+        </div>
+        <div style="width:100%;">
+        <img src="images/lieu.png" alt="lieu du projet 2" style="cursor:pointer;width:66%;"onmouseover="document.getElementById('parc_txt_2').style.opacity=1;document.getElementById('img_pjt_2').style.opacity=0.1;" onmouseout="document.getElementById('parc_txt_2').style.opacity=0;document.getElementById('img_pjt_2').style.opacity=1;"></img>
+        </div>
+        <div style="width:100%;">
+        <img src="images/cout.png" alt="coût du projet 2" style="cursor:pointer;width:66%;" onmouseover="document.getElementById('parc_txt_3').style.opacity=1;document.getElementById('img_pjt_2').style.opacity=0.1;" onmouseout="document.getElementById('parc_txt_3').style.opacity=0;document.getElementById('img_pjt_2').style.opacity=1;"></img>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+    <img id="img_pjt_2" src="images/projet2.jpg" alt="projet2" style="width:100%;"></img>
+    <div id="parc_txt_0" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Projet proposé par</strong><br><p>Ewen/Swan</p>
+    </div>
+    <div id="parc_txt_1" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Objectifs</strong> <li>Poursuivre l’aménagement du Parc du Plessis</li><li>Favoriser la pratique sportive et ludique, accessible à tout âge</li>
+    </div>
+    <div id="parc_txt_3" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Montant</strong><p>45 000 €</p>
+    </div>
+    <div id="parc_txt_2" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Localisation</strong><p>Parc du Plessis</p>
+    </div>
+    </div>
+  </div>
+  <div class="container" style="padding-bottom:20px;">
+    <div class="col-md-6">
+      <h4 style="color:#1d68a5;">TERRE VIVANTE<br>CHEZ L'ÂNE ESTER</h4>
+      <br>
+      <div class="wrapper_bdgtptcpf">
+        <div class="100%">
+        <img src="images/faces.png" alt="personne(s) proposant le projet 1" style="cursor:pointer;width:66%;"onmouseover="document.getElementById('nature_txt_0').style.opacity=1;document.getElementById('img_pjt_1').style.opacity=0.1;" onmouseout="document.getElementById('nature_txt_0').style.opacity=0;document.getElementById('img_pjt_1').style.opacity=1;"></img>
+        </div>
+        <div class="100%">
+        <img src="images/cible.png" alt="objectif du projet 1" style="cursor:pointer;width:66%;"onmouseover="document.getElementById('nature_txt_1').style.opacity=1;document.getElementById('img_pjt_1').style.opacity=0.1;" onmouseout="document.getElementById('nature_txt_1').style.opacity=0;document.getElementById('img_pjt_1').style.opacity=1;"></img>
+        </div>
+        <div class="100%">
+        <img src="images/lieu.png" alt="lieu du projet 1" style="cursor:pointer;width:66%;"onmouseover="document.getElementById('nature_txt_2').style.opacity=1;document.getElementById('img_pjt_1').style.opacity=0.1;" onmouseout="document.getElementById('nature_txt_2').style.opacity=0;document.getElementById('img_pjt_1').style.opacity=1;"></img>
+        </div>
+        <div class="100%">
+        <img src="images/cout.png" alt="coût du projet 1" style="cursor:pointer;width:66%;" onmouseover="document.getElementById('nature_txt_3').style.opacity=1;document.getElementById('img_pjt_1').style.opacity=0.1;" onmouseout="document.getElementById('nature_txt_3').style.opacity=0;document.getElementById('img_pjt_1').style.opacity=1;"></img>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img id="img_pjt_1" src="images/projet1.jpg" alt="projet1" style="width:100%;"></img>
+      <div id="nature_txt_0" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Projet proposé par</strong><br><p>Laëtitia/Nicolas</p>
+      </div>
+      <div id="nature_txt_1" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Objectifs</strong> <li>Préserver et protéger la biodiversité à Lanester</li><li>Sensibiliser le grand public</li><li>Inciter à agir pour la biodiversité</li>
+      </div>
+      <div id="nature_txt_3" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Montant</strong><p>20 000 €</p>
+      </div>
+      <div id="nature_txt_2" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Localisation</strong><p>Espaces publics et écoles</p>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="padding-bottom:20px;">
+    <div class="col-md-6">
+      <h4 style="color:#1d68a5;">À VOS VÉLOS,<br>PRÊTS ? ROULEZ !</h4>
+      <br>
+      <div class="wrapper_bdgtptcpf">
+        <div class="100%">
+        <img src="images/faces.png" alt="personne(s) proposant le projet 5" style="cursor:pointer;width:66%;" onmouseover="document.getElementById('velos_txt_0').style.opacity=1;document.getElementById('img_pjt_5').style.opacity=0.1;" onmouseout="document.getElementById('velos_txt_0').style.opacity=0;document.getElementById('img_pjt_5').style.opacity=1;"></img>
+        </div>
+        <div class="100%">
+        <img src="images/cible.png" alt="objectif du projet 5" style="cursor:pointer;width:66%;"onmouseover="document.getElementById('velos_txt_1').style.opacity=1;document.getElementById('img_pjt_5').style.opacity=0.1;" onmouseout="document.getElementById('velos_txt_1').style.opacity=0;document.getElementById('img_pjt_5').style.opacity=1;"></img>
+        </div>
+        <div class="100%">
+        <img src="images/lieu.png" alt="lieu du projet 5" style="cursor:pointer;width:66%;"onmouseover="document.getElementById('velos_txt_2').style.opacity=1;document.getElementById('img_pjt_5').style.opacity=0.1;" onmouseout="document.getElementById('velos_txt_2').style.opacity=0;document.getElementById('img_pjt_5').style.opacity=1;"></img>
+        </div>
+        <div class="100%">
+        <img src="images/cout.png" alt="coût du projet 5" style="cursor:pointer;width:66%;" onmouseover="document.getElementById('velos_txt_3').style.opacity=1;document.getElementById('img_pjt_5').style.opacity=0.1;" onmouseout="document.getElementById('velos_txt_3').style.opacity=0;document.getElementById('img_pjt_5').style.opacity=1;"></img>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+    <img id="img_pjt_5" src="images/projet5.jpg" alt="projet5" style="width:100%;"></img>
+    <div id="velos_txt_0" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Projet proposé par</strong><br><p>Gwénaël</p>
+    </div>
+    <div id="velos_txt_1" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Objectifs</strong><li>Inciter à prendre son vélo pour se déplacer</li><li>Faciliter et sécuriser les accès piétons et cyclistes autour d’établissements scolaires</li>
+    </div>
+    <div id="velos_txt_3" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Montant</strong><p>30 000 €</p>
+    </div>
+    <div id="velos_txt_2" class="centered_text" style="opacity:0;width:100%;max-width:200px;"><strong style="font-family:Fira Sans Bold;font-size:18px;color:#1d68a5;">Localisation</strong><p>Autour des établissements scolaires</p>
+    </div>
+    </div>
+  </div>
+<hr>
+<div class="container" style="padding-bottom:20px;">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8">
+  <p>Pour en savoir sur le budget participatif et sur ses éditions précédentes, rendez-vous sur <a href="http://www.lanester.bzh">le site de la Ville de Lanester</a> ou sur <a href="https://echocitoyen.lanester.bzh/dialogs/">celui du budget participatif</a></p>
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>
+
+<hr>
+
+<script>
+  $(window).scroll(function() {
+      if ($(this).scrollTop() >= 50) {
+          $('#return-to-top').fadeIn(200);
+      } else {
+          $('#return-to-top').fadeOut(200);
+      }
+  });
+  $('#return-to-top').click(function() {
+      $('body,html').animate({
+          scrollTop : 0
+      }, 500);
+      $(this).class("fa fa-chevron-up");
+  });
+</script>
+
+<div class="footer teal">
+        Service informatique | Ville de Lanester | 2019<br>
+        <a href="mentions_legales.html">Mentions légales</a>
+</div>
+</body>

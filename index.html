@@ -1,0 +1,186 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Lanester, commune, budget, datavisualisation, graphique, politique, statistique, open data">
+  <meta name="description" content="Datavisualisation des données budgétaires de Lanester (56)." />
+  <title>Ville de Lanester - Budget 2019</title>
+  <script src="https://code.angularjs.org/1.7.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/d3.v4.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/modernizr.min.js"></script>
+  <script src="https://code.angularjs.org/1.2.2/angular-animate.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--
+  <script src="getbudget.js" type="text/javascript"></script> -->
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+  <!-- css -->
+  <link rel="stylesheet" type="text/css" href="css/elements.css">
+
+  </head>
+<body>
+<a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div class="container-fluid teal hero">
+    <div class="col-logo middle">
+      <a href="http://www.lanester.bzh" title="site de la Ville de Lanester" target="_blank"><img class="poster" src="images/logoblc_lanester.png"></img></a>
+    </div>
+    <div class="container" style="margin-bottom:50px;">
+      <div class="center middle-text">
+        <h1>Budget 2019</h1>
+        <h3>de la Ville de Lanester</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar" id="myNavbar">
+    <div class="container" style="min-height: 0px">
+    <a href="index.html"><i class="fa fa-home" style="font-size:28px"></i></a>
+    <a href="grands_chiffres.html">Les grands chiffres</a>
+    <a href="depenses_recettes.html">Les dépenses et recettes</a>
+    <a href="programme_investissements.html">Le programme d'investissements</a>
+    <a href="budget_participatif.html">Le budget participatif</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+    </div>
+  </div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myNavbar");
+  if (x.className === "navbar") {
+    x.className += " responsive";
+  } else {
+    x.className = "navbar";
+  }
+}
+</script>
+
+<div class="container-fluid light-gray intro">
+  <div class="container">
+    <div class="col-md-6">
+      <div style="width:100%;margin-bottom:10px;">
+        <h2>LE CALENDRIER<br>DU BUDGET DE LA VILLE</h2>
+        <p>Le budget de la Ville s'avère un document complexe par bien des aspects : orientations politiques, équilibre financier, analyse des besoins et des ressources... Son adoption par le conseil municipal respecte des étapes qui doivent permettre aux élus de connaître, décider et contrôler les éléments qu'il contient.</p>
+      </div>
+      <div id="phase_budget1" style="width:100%;background-color:#3d10c9;color:#ffffff;margin-bottom:10px;">
+        <h5 style="color:#ffffff;padding:10px 10px 0;">❶ Le débat d'orientation budgétaire</h5><a><i id='mybtn' class="fa fa-angle-down" style="text-anchor:center;cursor:pointer;font-size:30px;color:#ffffff;" type="button" data-toggle="collapse" data-target="#dob" aria-expanded="false"></i></a>
+      </div>
+      <div>
+        <p id="dob" class="collapse" style="padding:10px;">Le conseil municipal prend de connaissance des lignes directrices du budget au moins deux mois avant le vote de ce dernier</p>
+      </div>
+      <div id="phase_budget2" style="width:100%;background-color:#1847bc;color:#ffffff;margin-bottom:10px;">
+        <h5 style="color:#ffffff;padding:10px 10px 0;">❷ Le vote du budget</h5><a><i id='mybtn' class="fa fa-angle-down" style="cursor:pointer;font-size:30px;color:#ffffff;" type="button" data-toggle="collapse" data-target="#budget_vote" aria-expanded="false"></i></a>
+      </div>
+      <div>
+        <p id="budget_vote" class="collapse" style="padding:10px;">Le conseil municipal adopte le budget primitif entre le 1<sup>er</sup> janvier et le 15 avril de l'année concernée par le budget (l'année ou exercice court du 1<sup>er</sup> janvier au 31 décembre)</p>
+      </div>
+      <div id="phase_budget3" style="width:100%;background-color:#189dbc;color:#ffffff;margin-bottom:10px;">
+        <h5 style="color:#ffffff;padding:10px 10px 0;">❸ Les décisions modificatives</h5><a><i id='mybtn' class="fa fa-angle-down" style="cursor:pointer;font-size:30px;color:#ffffff;" type="button" data-toggle="collapse" data-target="#dec_mod" aria-expanded="false"></i></a>
+      </div>
+      <div>
+        <p id="dec_mod" class="collapse" style="padding:10px;">Le conseil municipal vote éventuellement des changements du budget. Ce n'est possible qu'une fois le budget primitif adopté (le 15 avril au plus tard) et avant la clôture de l'exercice (le 31 décembre)</p>
+      </div>
+      <div id="phase_budget4" style="width:100%;background-color:#10c984;color:#ffffff;margin-bottom:10px;">
+        <h5 style="color:#ffffff;padding:10px 10px 0;">❹ Le compte administratif</h5><a><i id='mybtn' class="fa fa-angle-down" style="cursor:pointer;font-size:30px;color:#ffffff;" type="button" data-toggle="collapse" data-target="#cpt_adf" aria-expanded="false"></i></a>
+      </div>
+      <div>
+        <p id="cpt_adf" class="collapse" style="padding:10px;">Le conseil municipal vote l'état des dépenses et recettes réalisées avant le 15 juin de l'année qui suit l'exercice budgétaire concerné</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div style="width:100%;margin-bottom:10px;">
+        <h2>LES PRINCIPES<br>DU BUDGET<br>DE LA VILLE</h2>
+        <p>A l'instar de toutes les collectivités territoriales, les communes doivent respecter dans l'élaboration de leur budget quelques principes (...qui portent souvent leur lot d'exceptions) :<br></p>
+      </div>
+        <div class="wrapper">
+          <div style="background-color:#3d10c9;color:#ffffff;margin: 0 5px 10px;"><h5 style="padding:10px 10px 0;">l'annuité</h5>
+            <h5 style="padding-top: 0;"><a><i id='mybtn' class="fa fa-angle-down" style="cursor:pointer;padding-top: 0;color:#ffffff;font-size:30px;" type="button" data-toggle="collapse" data-target="#prcp1" aria-expanded="false"></i></a></h5>
+          </div>
+          <div style="background-color:#161ab2;color:#ffffff;margin: 0 5px 10px;"><h5 style="padding:10px 10px 0;">l'unité</h5>
+            <h5 style="padding-top: 0;"><a><i id='mybtn' class="fa fa-angle-down" style="cursor:pointer;padding-top: 0;color:#ffffff;font-size:30px;" type="button" data-toggle="collapse" data-target="#prcp2" aria-expanded="false"></i></a></h5>
+          </div>
+          <div>
+            <p id="prcp1" class="collapse" style="margin: 0 5px 10px;">Un budget est voté pour une année, soit du 1<sup>er</sup> janvier au 31 décembre. Cependant, comme le budget communal dépend étroitement de l'octroi de subventions ou du calcul de participations, le conseil municipal a jusqu'au 15 avril pour l'adopter.</p>
+          </div>
+          <div>
+            <p id="prcp2" class="collapse" style="margin: 0 5px 10px;">Le budget communal doit être présenté dans un document unique, contenant l'ensemble des recettes et des dépenses. Par exception au principe, la halte nautique, les pompes funèbres et la cuisine centrale possèdent des budgets dits "annexes", qui font l'objet d'un document voté à part.</p>
+          </div>
+        </div>
+        <div class="wrapper">
+          <div style="background-color:#1847bc;color:#ffffff;margin: 0 5px 10px;"><h5 style="padding:10px 10px 0;">l'universalité</h5>
+            <h5 style="padding-top: 0;"><a><i id='mybtn' class="fa fa-angle-down" style="cursor:pointer;padding-top: 0;color:#ffffff;font-size:30px;" type="button" data-toggle="collapse" data-target="#prcp3" aria-expanded="false"></i></a></h5>
+          </div>
+          <div style="background-color:#1d68a5;color:#ffffff;margin: 0 5px 10px;"><h5 style="padding:10px 10px 0;">la spécialité</h5>
+            <h5 style="padding-top: 0;"><a><i id='mybtn' class="fa fa-angle-down" style="cursor:pointer;padding-top: 0;color:#ffffff;font-size:30px;" type="button" data-toggle="collapse" data-target="#prcp4" aria-expanded="false"></i></a></h5>
+          </div>
+          </div>
+        <div class="wrapper">
+          <div>
+            <p id="prcp3" class="collapse" style="margin: 0 5px 10px;">Le budget communal s'exprime en chiffres bruts et l'ensemble des recettes doivent financer l'ensemble des dépenses.</p>
+          </div>
+          <div>
+            <p id="prcp4" class="collapse" style="margin: 0 5px 10px;">Les crédits budgétaires doivent être fléchés sur des dépenses précises. Les services de l'Etat établissent une nomenclature (M14), découpée en sections, chapitres et articles, pour y affecter les différentes recettes et dépenses de la commune.</p>
+          </div>
+        </div>
+        <div class="wrapper">
+          <div style="background-color:#16b2a5;color:#ffffff;margin: 0 5px 10px;"><h5 style="padding:10px 10px 0;">l'équilibre</h5>
+            <h5 style="padding-top: 0;"><a><i id='mybtn' class="fa fa-angle-down" style="cursor:pointer;padding-top: 0;color:#ffffff;font-size:30px;" type="button" data-toggle="collapse" data-target="#prcp5" aria-expanded="false"></i></a></h5>
+          </div>
+          <div style="background-color:#10c984;color:#ffffff;margin: 0 5px 10px;"><h5 style="padding:10px 10px 0;">la sincérité</h5>
+            <h5 style="padding-top: 0;"><a><i id='mybtn' class="fa fa-angle-down" style="cursor:pointer;padding-top: 0;color:#ffffff;font-size:30px;" type="button" data-toggle="collapse" data-target="#prcp6" aria-expanded="false"></i></a></h5>
+          </div>
+          <div>
+          <p id="prcp5" class="collapse" style="margin: 0 5px 10px;">Les sections (fonctionnement et investissement) du budget doivent être votées en équilibre, c'est-à-dire que l'ensemble des recettes couvrent l'ensemble des dépenses. Des jeux comptables et budgétaires permettent ou contraignent à certains mouvements : par exemple, l'autofinancement apparaît au titre des dépenses de fonctionnement et des recettes d'investissement.</p>
+          </div>
+          <div>
+          <p id="prcp6" class="collapse" style="margin: 0 5px 10px;">Les charges et produits doivent être évalués de façon sincère et exacte et l’ensemble des opérations prévisibles, retranscrites dans les écritures budgétaires.</p>
+          </div>
+        </div>
+    </div>
+    </div>
+    <hr>
+    <div class="container">
+    <div class="col-md-6">
+      <h2 style="text-align:center;">L'ACCÈS<br>AU BUDGET DE LA VILLE</h2>
+      <p>La loi du 7 août 2015 portant nouvelle organisation territoriale de la République (dite loi NOTRe) et son décret d'application du 23 juin 2016 posent comme objectifs de permettre aux citoyens de bénéficier d’informations « claires et lisibles ». Les collectivités territoriales de plus de 3 500 habitants doivent garantir l'accès aux documents budgétaires adoptés par les assemblées délibérantes. Les documents relatifs au budget de la Ville de Lanester sont, donc, disponibles <a href="http://www.lanester.bzh" target="blank">sur le site Internet de la Ville</a>. Les informations financières présentées sont publiées, comme le prévoit les textes législatifs et réglementaires, dans des conditions garantissant « leur accessibilité intégrale », « leur conformité aux documents soumis à l’organe délibérant » et « leur bonne conservation et leur intégrité ». Le public y accède gratuitement et facilement, aussi bien pour leur lecture que pour leur téléchargement, dans un format non modifiable.
+    </div>
+    <div class="col-md-6">
+      <h2 style="text-align:center;">LA VISUALISATION<br>DES DONNÉES</h2>
+      <p>Les documents budgétaires se composent essentiellement de textes et de tableaux. Si leur accessibilité constitue une obligation légale/réglementaire, il n'en reste pas moins que leur compréhension reste ardue.<br> Si, comme le veut l'adage, "une image vaut mille mots, c'est que notre cerveau a une approche très visuelle des informations. Ainsi un tableau de données permet difficilement d'en extraire rapidement les points d'intérêt ou les corrélations. La visualisation des données permet une exploration visuelle et interactive des données et leur représentation graphique.<br>La Ville de Lanester vous propose ces quelques pages afin de vous faire découvrir son budget.</p>
+      <div class="encart"><h5 style="padding:0;"><img src="images/curseur_blanc.png"></img><br>Survolez les graphiques !<br>Appuyez sur les boutons !<br>Dépliez les flèches !<br>Explorez, découvrez et comprenez les enjeux du budget !</h5>
+    </div>
+  </div>
+</div>
+
+<hr>
+<script>
+$('#mybtn').click(function(){
+    $('#mybtn').toggleClass("fa-angle-down fa-angle-up");
+});
+$(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {
+        $('#return-to-top').fadeIn(200);
+    } else {
+        $('#return-to-top').fadeOut(200);
+    }
+});
+$('#return-to-top').click(function() {
+    $('body,html').animate({
+        scrollTop : 0
+    }, 500);
+    $(this).class("fa fa-chevron-up");
+});
+</script>
+  <div class="footer teal">
+          Service informatique | Ville de Lanester | 2019<br>
+          <a href="mentions_legales.html">Mentions légales</a>
+  </div>
+</body>

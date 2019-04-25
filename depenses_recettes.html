@@ -1,0 +1,181 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="keywords" content="Lanester, commune, budget, datavisualisation, graphique, politique, statistique, open data">
+  <meta name="description" content="Datavisualisation des données budgétaires de Lanester (56)." />
+  <title>Ville de Lanester - Budget 2019</title>
+  <script src="https://code.angularjs.org/1.7.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/d3.v4.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/modernizr.min.js"></script>
+  <script src="https://code.angularjs.org/1.2.2/angular-animate.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--
+  <script src="getbudget.js" type="text/javascript"></script> -->
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+  <!-- css -->
+  <link rel="stylesheet" type="text/css" href="css/elements.css">
+
+  </head>
+<body style="width:100%;">
+  <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div class="container-fluid teal hero">
+    <div class="col-logo middle">
+      <a href="http://www.lanester.bzh" title="site de la Ville de Lanester" target="_blank"><img class="poster" src="images/logoblc_lanester.png"></img></a>
+    </div>
+    <div class="container" style="margin-bottom:50px;">
+      <div class="center middle-text">
+        <h1>Budget 2019</h1>
+        <h3>de la Ville de Lanester</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar" id="myNavbar">
+    <div class="container" style="min-height: 0px">
+    <a href="index.html"><i class="fa fa-home" style="font-size:28px"></i></a>
+    <a href="grands_chiffres.html">Les grands chiffres</a>
+    <a href="depenses_recettes.html">Les dépenses et recettes</a>
+    <a href="programme_investissements.html">Le programme d'investissements</a>
+    <a href="budget_participatif.html">Le budget participatif</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+    </div>
+  </div>
+
+  <script>
+  function myFunction() {
+    var x = document.getElementById("myNavbar");
+    if (x.className === "navbar") {
+      x.className += " responsive";
+    } else {
+      x.className = "navbar";
+    }
+  }
+  </script>
+
+  <div class="container-fluid light-gray intro">
+    <div class="container">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+      <h2>LE BUDGET SELON LES SECTIONS</h2>
+      <p>En vertu du principe d'équilibre, les recettes de chacune des sections du budget primitif (<a href='depenses_recettes.html#sect_fonct'>fonctionnement</a> et <a href='depenses_recettes.html#sect_invest'>investissement</a>) doivent intégralement couvrir les dépenses.</p>
+      <div class="col-md-2"></div>
+      <div class="col-md-8 encart"><img src="images/curseur_blanc.png"></img><br>Survolez les graphiques pour faire apparaître plus d'informations !<br>Cliquez sur les "<i class='fa fa-angle-down'></i>" pour dérouler de nouvelles informations !
+      </div>
+    </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6" style="margin-top:50px;margin-bottom=0;">
+      <h4>LA SECTION DE FONCTIONNEMENT</h4>
+    </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+    <div class="container" id = "sect_fonct">
+      <div class="col-md-6">
+        <div class="svg-container" id="chart3">
+        </div>
+        <div class="legend-container" id="legend3">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="svg-container" id="chart1">
+        </div>
+        <div id="legend1">
+        </div>
+      </div>
+      <script src="js/recettes_fonctionnement.js" charset="utf-8"></script>
+      <script src="js/depenses_fonctionnement.js" charset="utf-8"></script>
+    </div>
+    <hr>
+    <div class="container">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8" style="margin-top:50px;margin-bottom=0;">
+      <h4>LA SECTION D'INVESTISSEMENT</h4>
+    </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+    <div class="container" id = "sect_invest">
+      <div class="col-md-6">
+        <div class="svg-container" id="chart4">
+        </div>
+        <div class="legend-container" id="legend4">
+        </div>
+      </div>
+      <script src="js/recettes_investissement.js" charset="utf-8"></script>
+      <div class="col-md-6">
+        <div class="svg-container" id="chart2">
+        </div>
+        <div class="legend-container" id="legend2">
+        </div>
+      </div>
+      <script src="js/depenses_investissement.js" charset="utf-8"></script>
+    </div>
+    <hr>
+    <div class="container">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+      <h2>L'EVOLUTION DE LA DOTATION GLOBALE DE FONCTIONNEMENT</h2>
+      <p>Après plusieurs années de diminution (-20,86% entre 2014 et 2018),<br>l'Etat a annoncé garantir la constance de la <i>dotation globale de fonctionnement</i>. Enjeu de la libre administration et de l'équilibre financier des collectivités territoriales, cette ressource importante du budget communal se compose :<li> d'une part <i>forfaitaire</i>, liée historiquement aux missions que la commune accomplit en lieu et place de l'Etat et calculée à partir de différents éléments (population, superficie...)</li><li>d'une part <i>de péréquation</i>, basée sur un principe de redistribution de l'impôt afin d'assurer la solidarité entre les territoires.</li>
+        <div class="col-md-2"></div>
+        <div class="col-md-8 encart"><img src="images/curseur_blanc.png"></img><br>Survolez les points du graphique pour en savoir plus !
+        </div>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <div class="svg-container" id="dgf_chart2">
+        </div>
+      </div>
+      <div class="col-md-2">
+      </div>
+      <script src="js/dgf_evol.js" charset="utf-8"></script>
+    </div>
+  </div>
+
+<hr>
+<script>
+$("a").click(function(){
+    $(this).find("i").toggleClass("fa-angle-down fa-angle-up");
+});
+$(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {
+        $('#return-to-top').fadeIn(200);
+    } else {
+        $('#return-to-top').fadeOut(200);
+    }
+});
+$('#return-to-top').click(function() {
+    $('body,html').animate({
+        scrollTop : 0
+    }, 500);
+    $(this).class("fa fa-chevron-up");
+});
+</script>
+<div class="footer teal">
+        Service informatique | Ville de Lanester | 2019<br>
+        <a href="mentions_legales.html">Mentions légales</a>
+</div>
+</body>

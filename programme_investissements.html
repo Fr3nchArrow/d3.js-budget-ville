@@ -1,0 +1,122 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Lanester, commune, budget, datavisualisation, graphique, politique, statistique, open data">
+  <meta name="description" content="Datavisualisation des données budgétaires de Lanester (56)." />
+  <title>Ville de Lanester - Budget 2019</title>
+  <script src="https://code.angularjs.org/1.7.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/d3.v4.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/modernizr.min.js"></script>
+  <script src="https://code.angularjs.org/1.2.2/angular-animate.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--
+  <script src="getbudget.js" type="text/javascript"></script> -->
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+  <!-- css -->
+  <link rel="stylesheet" type="text/css" href="css/elements.css">
+
+  </head>
+<body>
+  <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div class="container-fluid teal hero">
+    <div class="col-logo middle">
+      <a href="http://www.lanester.bzh" title="site de la Ville de Lanester" target="_blank"><img class="poster" src="images/logoblc_lanester.png"></img></a>
+    </div>
+    <div class="container" style="margin-bottom:50px;">
+      <div class="center middle-text">
+        <h1>Budget 2019</h1>
+        <h3>de la Ville de Lanester</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar" id="myNavbar">
+    <div class="container" style="min-height: 0px">
+    <a href="index.html"><i class="fa fa-home" style="font-size:28px"></i></a>
+    <a href="grands_chiffres.html">Les grands chiffres</a>
+    <a href="depenses_recettes.html">Les dépenses et recettes</a>
+    <a href="programme_investissements.html">Le programme d'investissements</a>
+    <a href="budget_participatif.html">Le budget participatif</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+    </div>
+  </div>
+
+  <script>
+  function myFunction() {
+    var x = document.getElementById("myNavbar");
+    if (x.className === "navbar") {
+      x.className += " responsive";
+    } else {
+      x.className = "navbar";
+    }
+  }
+  </script>
+
+  <div class="container-fluid light-gray intro">
+    <div class="container">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <h2>LES INVESTISSEMENTS PAR SECTEUR</h2>
+        <p>Chaque année, la Ville de Lanester achète du matériel, construit ou aménage des bâtiments, réalise des travaux d'infrastructures, etc. Toutes ces actions font partie des investissements de la commune, parce qu'elles modifient son patrimoine.<br>Si ces dépenses ne traduisent pas les grandes tendances d'un mandat politique (qui sont plutôt liées aux dépenses de fonctionnement), elles démontrent la capacité, à un instant déterminé, de la ville à anticiper, programmer et réaliser des travaux et achats.</p>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8 encart"><img src="images/curseur_blanc.png" style="height:auto;"></img><br>Cliquez sur une année pour voir la répartition des investissements programmés au budget primitif concerné !<br>Survolez les différentes cercles pour voir apparaître des informations !</div>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+    <div class="container" style="padding-top:50px">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8 annee" style="height:50px;" id="whydataviz">
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-md-12 invest">
+        <div class="svg-container" id="chart1">
+        </div>
+        <div class="legend-container" id="enough">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-md-12" id="leg_sect" style="padding-bottom:20px;">
+      </div>
+    </div>
+    <script src="js/treemap.js" charset="utf-8"></script>
+  </div>
+<hr>
+<script>
+  $(window).scroll(function() {
+      if ($(this).scrollTop() >= 50) {
+          $('#return-to-top').fadeIn(200);
+      } else {
+          $('#return-to-top').fadeOut(200);
+      }
+  });
+  $('#return-to-top').click(function() {
+      $('body,html').animate({
+          scrollTop : 0
+      }, 500);
+      $(this).class("fa fa-chevron-up");
+  });
+</script>
+  <div class="footer teal">
+          Service informatique | Ville de Lanester | 2019<br>
+          <a href="mentions_legales.html">Mentions légales</a>
+  </div>
+</body>
